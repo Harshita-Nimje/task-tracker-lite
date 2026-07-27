@@ -21,7 +21,7 @@ const Task = sequelize.define("Task", {
     },
 });
 
-// 🔗 Associations
+
 User.hasMany(Task);
 Task.belongsTo(User);
 

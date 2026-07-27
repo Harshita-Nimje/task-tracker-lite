@@ -1,6 +1,6 @@
 import Category from "../models/Category.js";
 
-// ✅ CREATE CATEGORY (Admin only)
+
 export const createCategory = async (req, res) => {
     try {
         const { name } = req.body;
@@ -22,7 +22,7 @@ export const createCategory = async (req, res) => {
     }
 };
 
-// ✅ GET ALL CATEGORIES (All users)
+
 export const getCategories = async (req, res) => {
     try {
         const categories = await Category.findAll();
@@ -34,7 +34,7 @@ export const getCategories = async (req, res) => {
     }
 };
 
-// ✅ UPDATE CATEGORY (Admin only)
+
 export const updateCategory = async (req, res) => {
     try {
         const { id } = req.params;
@@ -59,7 +59,7 @@ export const updateCategory = async (req, res) => {
     }
 };
 
-// ✅ DELETE CATEGORY (Admin only)
+
 export const deleteCategory = async (req, res) => {
     try {
         const { id } = req.params;

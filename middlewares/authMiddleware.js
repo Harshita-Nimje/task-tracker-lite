@@ -1,37 +1,3 @@
-// import jwt from "jsonwebtoken";
-// import User from "../models/User.js";
-
-// const authMiddleware = async (req, res, next) => {
-//     try {
-//         let token;
-
-//         // Get token from header
-//         if (
-//             req.headers.authorization &&
-//             req.headers.authorization.startsWith("Bearer")
-//         ) {
-//             token = req.headers.authorization.split(" ")[1];
-//         }
-
-//         // If no token
-//         if (!token) {
-//             return res.status(401).json({ message: "Not authorized, no token" });
-//         }
-
-//         // Verify token
-//         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-//         // Attach user to request
-//         req.user = await User.findByPk(decoded.id);
-
-//         next();
-
-//     } catch (error) {
-//         return res.status(401).json({ message: "Invalid token" });
-//     }
-// };
-
-// export default authMiddleware;
 
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
@@ -41,7 +7,7 @@ const authMiddleware = async (req, res, next) => {
     try {
         let token;
 
-        // ✅ Check Authorization header
+
         if (
             req.headers.authorization &&
             req.headers.authorization.startsWith("Bearer ")
@@ -49,17 +15,17 @@ const authMiddleware = async (req, res, next) => {
             token = req.headers.authorization.split(" ")[1];
         }
 
-        // ❌ No token
+
         if (!token) {
             return res.status(401).json({
                 message: "Not authorized, no token",
             });
         }
 
-        // ✅ Verify token
+
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        // ✅ Find user from DB (exclude password if exists)
+
         const user = await User.findByPk(decoded.id);
 
         if (!user) {
@@ -68,7 +34,7 @@ const authMiddleware = async (req, res, next) => {
             });
         }
 
-        // Attach user to request
+
         req.user = user;
 
         next();

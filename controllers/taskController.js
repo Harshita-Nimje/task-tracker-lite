@@ -1,7 +1,7 @@
 import Task from "../models/Task.js";
 import Category from "../models/Category.js";
 
-// ✅ CREATE TASK
+
 export const createTask = async (req, res) => {
     try {
         const { title, description, dueDate, categoryId } = req.body;
@@ -29,7 +29,7 @@ export const createTask = async (req, res) => {
     }
 };
 
-// ✅ GET USER TASKS
+
 export const getMyTasks = async (req, res) => {
     try {
         const tasks = await Task.findAll({
@@ -44,7 +44,7 @@ export const getMyTasks = async (req, res) => {
     }
 };
 
-// ✅ UPDATE TASK
+
 export const updateTask = async (req, res) => {
     try {
         const { id } = req.params;
@@ -56,12 +56,12 @@ export const updateTask = async (req, res) => {
             return res.status(404).json({ message: "Task not found" });
         }
 
-        // 🔒 Only owner can update
+
         if (task.UserId !== req.user.id) {
             return res.status(403).json({ message: "Not allowed" });
         }
 
-        // 🚨 IMPORTANT: Due date restriction
+
         const now = new Date();
         if (new Date(task.dueDate) < now && status) {
             return res.status(400).json({
@@ -85,7 +85,7 @@ export const updateTask = async (req, res) => {
     }
 };
 
-// ✅ DELETE TASK
+
 export const deleteTask = async (req, res) => {
     try {
         const { id } = req.params;
